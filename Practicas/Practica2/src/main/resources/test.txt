@@ -1,0 +1,16 @@
+-- Esto es un comentario 
+{- esto es un comentario
+multi linea-}
+123214324
+12324.123213
+for
+if
+then 
+else
+Data
+Int
+integer
+idenftificados
+case 
+of
+
