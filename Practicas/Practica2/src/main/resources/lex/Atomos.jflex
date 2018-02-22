@@ -8,7 +8,7 @@ PUNTO   = \.
 ENTERO  = [1-9][0-9]* | 0+
 COMENTARIO_NORMAL = --(\ |[:jletterdigit:])*
 COMENTARIO_MULTI = \{-([:jletterdigit:] | \n |\ )*-\}
-PALABRA_RESERVADA = [A-Z][:jletterdigit:]* | if | else | where | then | case | of
+PALABRA_RESERVADA = [A-Z][:jletterdigit:]* | if | else | where | then | case | of | deriving | data | error | let | in
 ID_HASKELL = [:jletter:] [:jletterdigit:]*
 %%
 {ENTERO}      { System.out.print("ENTERO("+yytext() + ")"); }

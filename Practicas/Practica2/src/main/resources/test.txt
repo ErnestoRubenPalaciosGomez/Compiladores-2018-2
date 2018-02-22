@@ -13,4 +13,9 @@ integer
 idenftificados
 case 
 of
+data
+deriving
+error
+let 
+in
 
