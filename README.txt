@@ -8,3 +8,6 @@ correo: ernesto_palacios@ciencias.unam.mx
 Peto Gutierrez Emanuel 
 correo: empg014@ciencias.unam.mx
 
+Yuguo Xie 
+yuguoxie123@ciencias.unam.mx
+
