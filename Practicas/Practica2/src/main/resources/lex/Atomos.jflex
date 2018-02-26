@@ -5,7 +5,6 @@ package com.mycompany.practica2;
 %standalone
 %unicode
 PUNTO   = \.
-CARACTER = \| | \( | \) | \{  | \} | \[ | \] | \< | \> | \\ | \. | \*  | \+ | \? | \^ | \$ | \/  | \.  | \" | \~ | \! | \¿ | \¡
 ENTERO  = [1-9][0-9]* | 0+
 COMENTARIO_NORMAL = --~\n
 COMENTARIO_MULTI = \{-~-\}
