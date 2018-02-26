@@ -1,16 +1,15 @@
--- Esto es un comentario 
-{- esto es un comentario
-multi linea-}
-123214324
-12324.123213
-for
-if
-then 
-else
-Data
-Int
-integer
-idenftificados
-case 
-of
+{-
+  ¿Esto es un comentario?
+-}
+fizz :: Int -> String
+fizz n | n `mod` 15 == 0  = "FizzBuzz"
+       | n `mod` 3  == 0  = "Fizz"
+       | n `mod` 5  == 0  = "Buzz"
+       | otherwise        = show n
+
+main :: IO()
+main = mapM_ putStrLn $ map fizz [1..100]
+
+-- ¡¡¡¡Fin de FIZZBUZZ!!!
+
 

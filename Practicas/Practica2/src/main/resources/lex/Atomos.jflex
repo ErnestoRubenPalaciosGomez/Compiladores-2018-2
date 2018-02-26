@@ -5,10 +5,13 @@ package com.mycompany.practica2;
 %standalone
 %unicode
 PUNTO   = \.
+CARACTER = \| | \( | \) | \{  | \} | \[ | \] | \< | \> | \\ | \. | \*  | \+ | \? | \^ | \$ | \/  | \.  | \" | \~ | \! | \¿ | \¡
 ENTERO  = [1-9][0-9]* | 0+
-COMENTARIO_NORMAL = --(\ |[:jletterdigit:])*
-COMENTARIO_MULTI = \{-([:jletterdigit:] | \n |\ )*-\}
-PALABRA_RESERVADA = [A-Z][:jletterdigit:]* | if | else | where | then | case | of | deriving | data | error | let | in
+COMENTARIO_NORMAL = --~\n
+COMENTARIO_MULTI = \{-~-\}
+PALABRA_RESERVADA = [A-Z][:jletterdigit:]* | if | else | where | then | case | of | deriving | data 
+                    | error | let | in | class | default | do | import | infix | infixl | instance 
+                    | module | newtype | type | fizz 
 ID_HASKELL = [:jletter:] [:jletterdigit:]*
 %%
 {ENTERO}      { System.out.print("ENTERO("+yytext() + ")"); }
