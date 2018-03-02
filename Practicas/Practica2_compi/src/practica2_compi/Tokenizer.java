@@ -18,7 +18,7 @@ public class Tokenizer {
         automata = au;
     }
     
-    public boolean analizador(String cadena){
+    public boolean analizar(String cadena){
         int i = 0;
         int estado_actual;
         boolean finalizado = false; ///variable para salir del ciclo
@@ -27,13 +27,11 @@ public class Tokenizer {
         while(!finalizado){
             estado_actual = 0;
             pila.push(-10); //-10 representará el fondo de la pila
-            
             while(i<cadena.length() && automata.transicion(estado_actual, cadena.charAt(i)) >= 0){
                 pila.push(estado_actual);
                 estado_actual = automata.transicion(estado_actual, cadena.charAt(i));
                 i++;
             }//fin while
-            
             //backtrack
             while(!automata.F.contains(estado_actual)){//mientras estado_actual no sea final
                 estado_actual = pila.pop();
@@ -43,7 +41,6 @@ public class Tokenizer {
                     return false;
                 }
             }//fin while
-            
             if(i>=cadena.length()){
                 finalizado = true;
                 return true;

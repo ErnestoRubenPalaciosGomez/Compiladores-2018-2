@@ -21,6 +21,8 @@ public class AFD {
      */
     public AFD(int inicial){
         alfabeto = new LinkedList();
+        transiciones = new LinkedList();
+        F = new LinkedList();
         q0 = inicial;
     }
     
@@ -53,8 +55,6 @@ public class AFD {
         int valor = -2;
         if(lista.size()>0){
             valor = lista.get(q); //Le asignamos a la variable valor el estado resultante.
-        }else{
-            System.out.println("Caracter fuera del alfabeto :'v");
         }
         
         return valor;

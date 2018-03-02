@@ -1,0 +1,7 @@
+hola mundo
+ab
+ababc
+ababab
+babababa
+aba
+c
