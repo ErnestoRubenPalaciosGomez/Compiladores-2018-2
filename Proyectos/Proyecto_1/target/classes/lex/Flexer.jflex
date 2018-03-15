@@ -8,6 +8,7 @@ public boolean es_inicio_linea = true;
 public boolean necesita_identacion = false;
 public int anterior = 0;
 public Stack<Integer> espacios_bloque = new Stack<>();
+public boolean es_vacia = true;
 public String salida = "";
 
 public void inicializa(){
@@ -66,11 +67,13 @@ public void VerificaEspacios(String cadena){
                 }else{
                     while(condicion){
                         aux = espacios_bloque.pop();
-                        System.out.println("entre " + aux);
                         salida += "DEINDENTA(" + aux + ")\n";
                         if (num_espacios == espacios_bloque.peek()){                            
                             condicion = false;
                             anterior = espacios_bloque.peek();
+                            if(anterior == 0){
+                              necesita_identacion = false;
+                            }
                         }  
                     }
                 }        
@@ -78,7 +81,6 @@ public void VerificaEspacios(String cadena){
                 if(num_espacios > anterior){
                     espacios_bloque.push(num_espacios);
                     salida +="INDENTA(" + num_espacios + ")\n";
-                    System.out.println(espacios_bloque.peek());
                     anterior = num_espacios;
                 }
             }
@@ -93,6 +95,18 @@ public void VerificaEspaciosInicio(){
         salida+= "Error de identacion en la linea :" + num_linea;
         cerrar();
     }
+}
+
+public void VerificaComentario(String cadena){
+    int z =-1;
+    int i = cadena.length()-1;
+    while(z == -1){
+        if(cadena.charAt(i) == '\n')
+            z = i;
+        i--;
+    }   
+    System.out.println(cadena.substring(z , cadena.length()).length());
+    VerificaEspacios(cadena.substring(z , cadena.length()));
 }
 %}
 %eof{
@@ -121,22 +135,31 @@ OPERADOR = "+" | "-" | "*" | "**" | "/" | "//" | "%" | "<" | "<=" | ">" | ">=" |
 SEPARADOR = ":"   
 SALTO = "\n"(" " | "\t")*
 INDENTA = (" " | "\t")*
-DEINDENTA = (" " | "\t")*
+LINEA_VACIA = "\n"(" " | "\t")*"\n"(" " | "\t")* 
+LINEA_COMENTARIO = "\n"(" " | "\t")*#~"\n"(" " | "\t")* 
+COMENTARIO = #~"\n"(" " | "\t")* 
 %%
 {BOOLEANO}  {salida+="BOOLEANO("+yytext() + ")"; es_inicio_linea = false;}
-{PALABRA_RESERVADA}  {salida += "PALABRA_RESERVADA("+yytext() + ")"; es_inicio_linea = false; }
-{OPERADOR}      {salida+="OPERADOR("+yytext() + ")"; es_inicio_linea = false;}
+{PALABRA_RESERVADA}  {salida += "PALABRA_RESERVADA("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
+{OPERADOR}      {salida+="OPERADOR("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
 {SEPARADOR}     {salida+="SEPARADOR("+yytext() + ")";
                  es_inicio_linea = false; 
-                 necesita_identacion = true;}
-{IDENTIFICADOR} {salida += "IDENTIFICADOR("+yytext() + ")"; es_inicio_linea = false;}
-{CADENA}    {VerificaCadena(yytext()); es_inicio_linea = false;}
-{ENTERO}    {salida += "ENTERO("+yytext() + ")"; es_inicio_linea = false;}
-{REAL}      {salida += "REAL("+yytext() + ")"; es_inicio_linea = false;}
-{SALTO}     {salida += "SALTO \n"; 
-             num_linea++; es_inicio_linea = true;
-             VerificaEspacios(yytext());}
-{INDENTA}   {VerificaEspaciosInicio();}
+                 necesita_identacion = true;
+                 es_vacia = false;}
+{IDENTIFICADOR} {salida += "IDENTIFICADOR("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
+{CADENA}    {VerificaCadena(yytext()); es_inicio_linea = false; es_vacia = false;}
+{ENTERO}    {salida += "ENTERO("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
+{REAL}      {salida += "REAL("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
+{LINEA_VACIA} {salida += "SALTO \n";VerificaComentario(yytext()); num_linea+=2;}
+{LINEA_COMENTARIO} {salida += "SALTO \n";VerificaComentario(yytext()); num_linea+=2;}
+{SALTO}     {if(!es_vacia){
+                salida += "SALTO \n"; 
+                es_inicio_linea = true;
+                num_linea++;
+                VerificaEspacios(yytext());
+                es_vacia = true;}else{ num_linea++;}}
 
+{INDENTA}   {VerificaEspaciosInicio(); }
+{COMENTARIO}   {salida += "SALTO \n"; es_inicio_linea = true; VerificaComentario(yytext()); es_vacia = true; num_linea++; }
 .             {salida+= "Error : palabra no encontrada en la linea " + num_linea; cerrar();}
 
