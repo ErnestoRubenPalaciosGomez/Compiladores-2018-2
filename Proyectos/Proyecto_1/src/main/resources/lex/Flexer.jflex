@@ -8,7 +8,6 @@ public boolean es_inicio_linea = true;
 public boolean necesita_identacion = false;
 public int anterior = 0;
 public Stack<Integer> espacios_bloque = new Stack<>();
-public boolean es_vacia = true;
 public String salida = "";
 
 public void inicializa(){
@@ -17,6 +16,7 @@ public void inicializa(){
 
 public void  cerrar(){
     imprime();
+    
     System.exit(0); 
 }
 public void VerificaCadena(String cadena){
@@ -30,7 +30,9 @@ public void VerificaCadena(String cadena){
 }
 
 public void imprime(){
+        
         System.out.println(salida);
+        System.out.println("la cantidad de lineas del programa es : " + num_linea);
         try {
             BufferedWriter escritor = new BufferedWriter(new FileWriter("out/" + Test.nombre_archivo + ".plx"));
             escritor.write(salida);
@@ -57,8 +59,6 @@ public void VerificaEspacios(String cadena){
 
             }
             if(num_espacios < anterior){
-                
-                Stack<Integer> pila_aux = new Stack<>();
                 int aux;
                 boolean condicion = true;
                 if(espacios_bloque.search(num_espacios)== -1){
@@ -96,18 +96,6 @@ public void VerificaEspaciosInicio(){
         cerrar();
     }
 }
-
-public void VerificaComentario(String cadena){
-    int z =-1;
-    int i = cadena.length()-1;
-    while(z == -1){
-        if(cadena.charAt(i) == '\n')
-            z = i;
-        i--;
-    }   
-    System.out.println(cadena.substring(z , cadena.length()).length());
-    VerificaEspacios(cadena.substring(z , cadena.length()));
-}
 %}
 %eof{
     boolean condicion = !espacios_bloque.isEmpty();
@@ -135,31 +123,27 @@ OPERADOR = "+" | "-" | "*" | "**" | "/" | "//" | "%" | "<" | "<=" | ">" | ">=" |
 SEPARADOR = ":"   
 SALTO = "\n"(" " | "\t")*
 INDENTA = (" " | "\t")*
-LINEA_VACIA = "\n"(" " | "\t")*"\n"(" " | "\t")* 
-LINEA_COMENTARIO = "\n"(" " | "\t")*#~"\n"(" " | "\t")* 
-COMENTARIO = #~"\n"(" " | "\t")* 
+LINEA_VACIA = "\n"(" " | "\t")*"\n"  | "\n"(" " | "\t")*#~"\n" 
+COMENTARIO = #~"\n" 
 %%
 {BOOLEANO}  {salida+="BOOLEANO("+yytext() + ")"; es_inicio_linea = false;}
-{PALABRA_RESERVADA}  {salida += "PALABRA_RESERVADA("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
-{OPERADOR}      {salida+="OPERADOR("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
+{PALABRA_RESERVADA}  {salida += "PALABRA_RESERVADA("+yytext() + ")"; es_inicio_linea = false;}
+{OPERADOR}      {salida+="OPERADOR("+yytext() + ")"; es_inicio_linea = false;}
 {SEPARADOR}     {salida+="SEPARADOR("+yytext() + ")";
                  es_inicio_linea = false; 
                  necesita_identacion = true;
-                 es_vacia = false;}
-{IDENTIFICADOR} {salida += "IDENTIFICADOR("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
-{CADENA}    {VerificaCadena(yytext()); es_inicio_linea = false; es_vacia = false;}
-{ENTERO}    {salida += "ENTERO("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
-{REAL}      {salida += "REAL("+yytext() + ")"; es_inicio_linea = false; es_vacia = false;}
-{LINEA_VACIA} {salida += "SALTO \n";VerificaComentario(yytext()); num_linea+=2;}
-{LINEA_COMENTARIO} {salida += "SALTO \n";VerificaComentario(yytext()); num_linea+=2;}
-{SALTO}     {if(!es_vacia){
-                salida += "SALTO \n"; 
+                 }
+{IDENTIFICADOR} {salida += "IDENTIFICADOR("+yytext() + ")"; es_inicio_linea = false;}
+{CADENA}    {VerificaCadena(yytext()); es_inicio_linea = false;}
+{ENTERO}    {salida += "ENTERO("+yytext() + ")"; es_inicio_linea = false;}
+{REAL}      {salida += "REAL("+yytext() + ")"; es_inicio_linea = false;}
+{LINEA_VACIA} { yypushback(1);num_linea++;}
+{COMENTARIO} {yypushback(1);}
+{SALTO}     {   salida += "SALTO \n"; 
                 es_inicio_linea = true;
                 num_linea++;
-                VerificaEspacios(yytext());
-                es_vacia = true;}else{ num_linea++;}}
+                VerificaEspacios(yytext());}
 
 {INDENTA}   {VerificaEspaciosInicio(); }
-{COMENTARIO}   {salida += "SALTO \n"; es_inicio_linea = true; VerificaComentario(yytext()); es_vacia = true; num_linea++; }
 .             {salida+= "Error : palabra no encontrada en la linea " + num_linea; cerrar();}
 
