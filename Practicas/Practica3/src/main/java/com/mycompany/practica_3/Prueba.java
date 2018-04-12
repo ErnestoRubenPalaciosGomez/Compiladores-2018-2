@@ -15,14 +15,16 @@ import java.io.Reader;
 /**
  *
  * @author Ernesto Palacios
- */
+ */  
 public class Prueba {
     
      public static void main(String args[]){
+         System.out.println("hola");
         try {
             Reader reader = new FileReader("src/main/resources/test.txt");
             Yylex y = new Yylex(reader);
             y.yylex();
+            System.out.println("he terminado de ver el archivo");
         }
         catch(FileNotFoundException ex) {
             System.out.println(ex.getMessage() + " No se encontró el archivo;");

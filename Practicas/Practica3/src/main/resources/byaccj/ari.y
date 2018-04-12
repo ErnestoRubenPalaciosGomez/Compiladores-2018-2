@@ -1,16 +1,3 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2001 Gerwin Klein <lsf@jflex.de>                          *
- * All rights reserved.                                                    *
- *                                                                         *
- * This is a modified version of the example from                          *
- *   http://www.lincom-asg.com/~rjamison/byacc/                            *
- *                                                                         *
- * Thanks to Larry Bell and Bob Jamison for suggestions and comments.      *
- *                                                                         *
- * License: BSD                                                            *
- *                                                                         *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 %{
   import java.io.*;
 %}
@@ -35,6 +22,7 @@ line:    NL      { if (interactive) System.out.print("Expression: "); }
        | exp NL  { System.out.println(" = " + $1); 
                    if (interactive) System.out.print("Expression: "); }
        ;
+
       
 exp:     NUM                { $$ = $1; }
        | exp '+' exp        { $$ = $1 + $3; }

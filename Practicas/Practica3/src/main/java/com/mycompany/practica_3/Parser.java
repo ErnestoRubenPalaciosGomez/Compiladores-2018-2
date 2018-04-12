@@ -17,7 +17,7 @@ package com.mycompany.practica_3;
 
 
 
-//#line 15 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 2 "../../../../../../src/main/resources/byaccj/ari.y"
   import java.io.*;
 //#line 19 "Parser.java"
 
@@ -292,7 +292,7 @@ final static String yyrule[] = {
 "exp : '(' exp ')'",
 };
 
-//#line 50 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 38 "../../../../../../src/main/resources/byaccj/ari.y"
 
   private Yylex lexer;
 
@@ -500,44 +500,44 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 3:
-//#line 34 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 21 "../../../../../../src/main/resources/byaccj/ari.y"
 { if (interactive) System.out.print("Expression: "); }
 break;
 case 4:
-//#line 35 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 22 "../../../../../../src/main/resources/byaccj/ari.y"
 { System.out.println(" = " + val_peek(1).dval); 
                    if (interactive) System.out.print("Expression: "); }
 break;
 case 5:
-//#line 39 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 27 "../../../../../../src/main/resources/byaccj/ari.y"
 { yyval.dval = val_peek(0).dval; }
 break;
 case 6:
-//#line 40 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 28 "../../../../../../src/main/resources/byaccj/ari.y"
 { yyval.dval = val_peek(2).dval + val_peek(0).dval; }
 break;
 case 7:
-//#line 41 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 29 "../../../../../../src/main/resources/byaccj/ari.y"
 { yyval.dval = val_peek(2).dval - val_peek(0).dval; }
 break;
 case 8:
-//#line 42 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 30 "../../../../../../src/main/resources/byaccj/ari.y"
 { yyval.dval = val_peek(2).dval * val_peek(0).dval; }
 break;
 case 9:
-//#line 43 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 31 "../../../../../../src/main/resources/byaccj/ari.y"
 { yyval.dval = val_peek(2).dval / val_peek(0).dval; }
 break;
 case 10:
-//#line 44 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 32 "../../../../../../src/main/resources/byaccj/ari.y"
 { yyval.dval = -val_peek(0).dval; }
 break;
 case 11:
-//#line 45 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 33 "../../../../../../src/main/resources/byaccj/ari.y"
 { yyval.dval = Math.pow(val_peek(2).dval, val_peek(0).dval); }
 break;
 case 12:
-//#line 46 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 34 "../../../../../../src/main/resources/byaccj/ari.y"
 { yyval.dval = val_peek(1).dval; }
 break;
 //#line 466 "Parser.java"
