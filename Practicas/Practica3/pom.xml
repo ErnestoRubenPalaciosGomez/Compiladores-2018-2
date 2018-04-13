@@ -28,7 +28,7 @@
         </executions>
         <configuration>
           <workingDirectory>src/main/java/com/mycompany/practica_3</workingDirectory>
-          <executable>yacc</executable>
+          <executable>byaccj</executable>
           <commandlineArgs>-Jpackage=com.mycompany.practica_3 ../../../../../../src/main/resources/byaccj/ari.y</commandlineArgs>
         </configuration>
       </plugin>

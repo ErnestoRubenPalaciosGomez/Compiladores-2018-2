@@ -1,8 +1,7 @@
 package com.mycompany.practica_3;
+
 %%
-%public
-%standalone
-%unicode
+
 %byaccj
 
 %{
@@ -14,9 +13,21 @@ package com.mycompany.practica_3;
   }
 %}
 
-NL  = \n | \r | \r\n
 NUM = [0-9]+ ("." [0-9]+)?
 
 %%
 
-.  {System.out.println("no he reconocido nada");}
+"+" | 
+"-" | 
+"*" | 
+"/" | 
+"^" | 
+"(" | 
+")"    { return (int) yycharat(0); }
+
+{NUM}  { yyparser.yylval = new ParserVal(Double.parseDouble(yytext()));
+         return Parser.NUM; }
+
+[ \t]+ { }
+
+.   { System.err.println("Error: unexpected character '"+yytext()+"'"); return -1; }

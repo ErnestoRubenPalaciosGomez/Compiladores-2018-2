@@ -10,9 +10,9 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:java</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath ${packageClassName}</exec.args>
+                <exec.args>"src/main/resources/text.txt"</exec.args>
                 <exec.executable>java</exec.executable>
-                <exec.mainClass>com.mycompany.practica_3.Prueba</exec.mainClass>
+                <exec.mainClass>com.mycompany.practica_3.Parser</exec.mainClass>
                 
             </properties>
         </action>
