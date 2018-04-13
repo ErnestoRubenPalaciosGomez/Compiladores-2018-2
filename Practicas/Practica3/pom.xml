@@ -29,7 +29,7 @@
         <configuration>
           <workingDirectory>src/main/java/com/mycompany/practica_3</workingDirectory>
           <executable>byaccj</executable>
-          <commandlineArgs>-Jpackage=com.mycompany.practica_3 ../../../../../../src/main/resources/byaccj/ari.y</commandlineArgs>
+          <commandlineArgs>-Jpackage=com.mycompany.practica_3 ../../../../../../src/main/resources/byaccj/gramatica2.y</commandlineArgs>
         </configuration>
       </plugin>
         

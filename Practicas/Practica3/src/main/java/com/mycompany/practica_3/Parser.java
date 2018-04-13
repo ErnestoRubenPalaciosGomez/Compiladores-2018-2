@@ -17,7 +17,7 @@ package com.mycompany.practica_3;
 
 
 
-//#line 15 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 3 "../../../../../../src/main/resources/byaccj/gramatica2.y"
   import java.io.*;
 //#line 19 "Parser.java"
 
@@ -158,56 +158,56 @@ final ParserVal dup_yyval(ParserVal val)
 }
 //#### end semantic value section ####
 public final static short NUM=257;
-public final static short fexp=258;
-public final static short dexp=259;
-public final static short NEG=260;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
-    0,    0,    0,    1,    1,
+    0,    0,    0,    1,    1,    1,    2,
 };
 final static short yylen[] = {                            2,
-    3,    3,    1,    3,    1,
+    3,    3,    1,    3,    3,    1,    1,
 };
 final static short yydefred[] = {                         0,
-    5,    0,    0,    0,    0,    0,    2,    1,    4,
+    7,    0,    0,    6,    0,    0,    0,    0,    0,    0,
+    4,    5,
 };
 final static short yydgoto[] = {                          2,
-    3,
+    3,    4,
 };
-final static short yysindex[] = {                      -252,
-    0,  -43,  -36, -252, -252, -252,    0,    0,    0,
+final static short yysindex[] = {                      -257,
+    0,  -36,  -39,    0, -257, -257, -257, -257,  -39,  -39,
+    0,    0,
 };
 final static short yyrindex[] = {                         0,
-    0,    0,    1,    0,    0,    0,    0,    0,    0,
+    0,    0,    1,    0,    0,    0,    0,    0,    2,    5,
+    0,    0,
 };
-final static short yygindex[] = {                        -1,
-    2,
+final static short yygindex[] = {                         0,
+    6,    7,
 };
-final static int YYTABLESIZE=46;
+final static int YYTABLESIZE=50;
 static short yytable[];
 static { yytable();}
 static void yytable(){
-yytable = new short[]{                          5,
-    3,    4,    7,    8,    1,    6,    0,    9,    0,    0,
+yytable = new short[]{                          1,
+    3,    2,    7,    0,    1,    0,    6,    8,    5,    0,
+    9,   10,    0,   11,   12,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    3,    0,    3,
+    0,    0,    0,    3,    2,    3,    2,    1,    0,    1,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
-yycheck = new short[] {                         43,
-    0,   45,    4,    5,  257,   42,   -1,    6,   -1,   -1,
+yycheck = new short[] {                        257,
+    0,    0,   42,   -1,    0,   -1,   43,   47,   45,   -1,
+    5,    6,   -1,    7,    8,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   43,   -1,   45,
+   -1,   -1,   -1,   43,   43,   45,   45,   43,   -1,   45,
 };
 }
 final static short YYFINAL=2;
-final static short YYMAXTOKEN=260;
+final static short YYMAXTOKEN=257;
 final static String yyname[] = {
 "end-of-file",null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
@@ -215,7 +215,6 @@ null,null,null,null,null,null,null,null,null,null,null,null,"'*'","'+'",null,
 "'-'",null,"'/'",null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-null,null,"'^'",null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
@@ -225,18 +224,21 @@ null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-null,null,null,null,null,null,"NUM","fexp","dexp","NEG",
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,"NUM",
 };
 final static String yyrule[] = {
 "$accept : exp",
-"exp : exp '+' exp",
-"exp : exp '-' exp",
+"exp : exp '+' texp",
+"exp : exp '-' texp",
 "exp : texp",
-"texp : texp '*' texp",
-"texp : NUM",
+"texp : texp '*' fexp",
+"texp : texp '/' fexp",
+"texp : fexp",
+"fexp : NUM",
 };
 
-//#line 41 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 28 "../../../../../../src/main/resources/byaccj/gramatica2.y"
 
   private Yylex lexer;
 
@@ -254,7 +256,7 @@ final static String yyrule[] = {
 
 
   public void yyerror (String error) {
-    System.out.println ("[ERROR] " + error);
+    System.err.println ("[ERROR] " + error);
   }
 
 
@@ -266,21 +268,17 @@ final static String yyrule[] = {
 
   public static void main(String args[]) throws IOException {
     Parser yyparser;
-      // parse a file
     yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
-    //yyparser.yydebug = true;
+    yyparser.yydebug = true;
     int condicion = yyparser.yyparse();
     if(condicion == 0){
         System.out.println("[ok]" + yyparser.yyval.dval);
     }else{
         System.err.print ("[ERROR] ");
         yyparser.yyerror("La expresión aritmética no esta bien formada.");
-    }
-
-    
-    
+    }  
   }
-//#line 211 "Parser.java"
+//#line 209 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -435,26 +433,22 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 1:
-//#line 33 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 17 "../../../../../../src/main/resources/byaccj/gramatica2.y"
 { yyval.dval = (val_peek(2).dval + val_peek(0).dval); }
 break;
 case 2:
-//#line 34 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 18 "../../../../../../src/main/resources/byaccj/gramatica2.y"
 { yyval.dval = (val_peek(2).dval - val_peek(0).dval); }
 break;
-case 3:
-//#line 35 "../../../../../../src/main/resources/byaccj/ari.y"
-{ yyval.dval = (val_peek(0).dval);}
-break;
 case 4:
-//#line 38 "../../../../../../src/main/resources/byaccj/ari.y"
+//#line 22 "../../../../../../src/main/resources/byaccj/gramatica2.y"
 {yyval.dval  = (val_peek(2).dval * val_peek(0).dval);}
 break;
 case 5:
-//#line 39 "../../../../../../src/main/resources/byaccj/ari.y"
-{}
+//#line 23 "../../../../../../src/main/resources/byaccj/gramatica2.y"
+{yyval.dval  = (val_peek(2).dval / val_peek(0).dval);}
 break;
-//#line 380 "Parser.java"
+//#line 374 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

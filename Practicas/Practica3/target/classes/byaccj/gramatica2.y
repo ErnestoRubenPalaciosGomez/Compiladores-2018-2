@@ -5,25 +5,25 @@
 
 
       
-%token <dval> NUM  /* a number */
+%token <dval> NUM 
 
 %type <dval> exp
 %type <dval> texp
 %type <dval> fexp
-%type <dval> dexp
 %left '-' '+'
 %left '*' '/'
-%left NEG          /* negation--unary minus */
      
 %%
-
-exp :  exp '+' exp  { $$ = ($1 + $3); }
-     | exp '-' exp  { $$ = ($1 - $3); }
-     | texp         { $$ = ($1);}
+exp  : exp  '+' texp  { $$ = ($1 + $3); }
+     | exp  '-' texp { $$ = ($1 - $3); }
+     | texp
      ;
 
-texp : texp '*' texp  {$$  = ($1 * $3);}
-      | NUM  {};
+texp  :  texp '*' fexp  {$$  = ($1 * $3);}
+      |  texp '/' fexp {$$  = ($1 / $3);}
+      | fexp
+
+fexp : NUM;
 %%
 
   private Yylex lexer;
@@ -54,17 +54,13 @@ texp : texp '*' texp  {$$  = ($1 * $3);}
 
   public static void main(String args[]) throws IOException {
     Parser yyparser;
-      // parse a file
     yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
-    //yyparser.yydebug = true;
+    yyparser.yydebug = true;
     int condicion = yyparser.yyparse();
     if(condicion == 0){
         System.out.println("[ok]" + yyparser.yyval.dval);
     }else{
         System.err.print ("[ERROR] ");
         yyparser.yyerror("La expresión aritmética no esta bien formada.");
-    }
-
-    
-    
+    }  
   }

@@ -13,17 +13,14 @@ package com.mycompany.practica_3;
   }
 %}
 
-NUM = [0-9]+ ("." [0-9]+)?
+NUM = (-)?[0-9]+ ("." [0-9]+)?
 
 %%
 
 "+" | 
 "-" | 
 "*" | 
-"/" | 
-"^" | 
-"(" | 
-")"    { return (int) yycharat(0); }
+"/"     { return (int) yycharat(0); }
 
 {NUM}  { yyparser.yylval = new ParserVal(Double.parseDouble(yytext()));
          return Parser.NUM; }
