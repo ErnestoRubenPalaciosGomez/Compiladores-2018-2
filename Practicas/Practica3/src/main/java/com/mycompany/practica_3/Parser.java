@@ -17,7 +17,7 @@ package com.mycompany.practica_3;
 
 
 
-//#line 3 "../../../../../../src/main/resources/byaccj/gramatica2.y"
+//#line 3 "../../../../../../src/main/resources/byaccj/gramatica1.y"
   import java.io.*;
 //#line 19 "Parser.java"
 
@@ -157,57 +157,104 @@ final ParserVal dup_yyval(ParserVal val)
   return dup;
 }
 //#### end semantic value section ####
-public final static short NUM=257;
+public final static short NL=257;
+public final static short NUM=258;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
-    0,    0,    0,    1,    1,    1,    2,
+    0,    0,    4,    4,    1,    1,    1,    2,    2,    2,
+    3,
 };
 final static short yylen[] = {                            2,
-    3,    3,    1,    3,    3,    1,    1,
+    0,    2,    2,    1,    3,    3,    1,    3,    3,    1,
+    1,
 };
-final static short yydefred[] = {                         0,
-    7,    0,    0,    6,    0,    0,    0,    0,    0,    0,
-    4,    5,
+final static short yydefred[] = {                         1,
+    0,   11,    0,    0,    0,    2,    3,    0,    0,    0,
+    0,    6,    5,    8,    9,
 };
-final static short yydgoto[] = {                          2,
-    3,    4,
+final static short yydgoto[] = {                          1,
+    3,    4,    5,    6,
 };
-final static short yysindex[] = {                      -257,
-    0,  -36,  -39,    0, -257, -257, -257, -257,  -39,  -39,
-    0,    0,
+final static short yysindex[] = {                         0,
+ -256,    0, -250,  -37,  -42,    0,    0, -256, -256, -256,
+ -256,    0,    0,    0,    0,
 };
 final static short yyrindex[] = {                         0,
-    0,    0,    1,    0,    0,    0,    0,    0,    2,    5,
-    0,    0,
+    0,    0,    4,    3,    1,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,
 };
 final static short yygindex[] = {                         0,
-    6,    7,
+    2,    5,    0,    0,
 };
-final static int YYTABLESIZE=50;
+final static int YYTABLESIZE=262;
 static short yytable[];
 static { yytable();}
 static void yytable(){
-yytable = new short[]{                          1,
-    3,    2,    7,    0,    1,    0,    6,    8,    5,    0,
-    9,   10,    0,   11,   12,    0,    0,    0,    0,    0,
+yytable = new short[]{                         10,
+   10,    2,    7,    4,   11,    9,    7,    8,    0,   12,
+   13,    0,    0,    0,   14,   15,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    3,    2,    3,    2,    1,    0,    1,
+    0,    0,    0,   10,    0,   10,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,   10,   10,    7,
+    7,    4,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
-yycheck = new short[] {                        257,
-    0,    0,   42,   -1,    0,   -1,   43,   47,   45,   -1,
-    5,    6,   -1,    7,    8,   -1,   -1,   -1,   -1,   -1,
+yycheck = new short[] {                         42,
+    0,  258,    0,    0,   47,   43,  257,   45,   -1,    8,
+    9,   -1,   -1,   -1,   10,   11,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   43,   43,   45,   45,   43,   -1,   45,
+   -1,   -1,   -1,   43,   -1,   45,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,  257,  258,  257,
+  258,  258,
 };
 }
-final static short YYFINAL=2;
-final static short YYMAXTOKEN=257;
+final static short YYFINAL=1;
+final static short YYMAXTOKEN=258;
 final static String yyname[] = {
 "end-of-file",null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
@@ -225,22 +272,27 @@ null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-null,null,null,null,null,"NUM",
+null,null,null,null,null,"NL","NUM",
 };
 final static String yyrule[] = {
-"$accept : exp",
-"exp : exp '+' texp",
-"exp : exp '-' texp",
+"$accept : input",
+"input :",
+"input : input line",
+"line : exp NL",
+"line : exp",
+"exp : texp '+' exp",
+"exp : texp '-' exp",
 "exp : texp",
-"texp : texp '*' fexp",
-"texp : texp '/' fexp",
+"texp : fexp '*' texp",
+"texp : fexp '/' texp",
 "texp : fexp",
 "fexp : NUM",
 };
 
-//#line 28 "../../../../../../src/main/resources/byaccj/gramatica2.y"
+//#line 39 "../../../../../../src/main/resources/byaccj/gramatica1.y"
 
   private Yylex lexer;
+  public static short linea = 0 ;
 
   private int yylex () {
     int yyl_return = -1;
@@ -271,14 +323,13 @@ final static String yyrule[] = {
     yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
     yyparser.yydebug = true;
     int condicion = yyparser.yyparse();
-    if(condicion == 0){
-        System.out.println("[ok]" + yyparser.yyval.dval);
-    }else{
-        System.err.print ("[ERROR] ");
-        yyparser.yyerror("La expresión aritmética no esta bien formada.");
-    }  
+    if(condicion != 0){
+      linea++;
+      System.err.print ("[ERROR] ");
+      yyparser.yyerror("La expresión aritmética no esta bien formada. en la linea " + linea);
+    }
   }
-//#line 209 "Parser.java"
+//#line 260 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -432,23 +483,31 @@ boolean doaction;
     switch(yyn)
       {
 //########## USER-SUPPLIED ACTIONS ##########
-case 1:
-//#line 17 "../../../../../../src/main/resources/byaccj/gramatica2.y"
-{ yyval.dval = (val_peek(2).dval + val_peek(0).dval); }
-break;
-case 2:
-//#line 18 "../../../../../../src/main/resources/byaccj/gramatica2.y"
-{ yyval.dval = (val_peek(2).dval - val_peek(0).dval); }
+case 3:
+//#line 23 "../../../../../../src/main/resources/byaccj/gramatica1.y"
+{ linea++;  System.out.println("[SUCCESS] liena " + linea + " [ok] " + val_peek(1).dval);}
 break;
 case 4:
-//#line 22 "../../../../../../src/main/resources/byaccj/gramatica2.y"
-{yyval.dval  = (val_peek(2).dval * val_peek(0).dval);}
+//#line 24 "../../../../../../src/main/resources/byaccj/gramatica1.y"
+{ linea++;  System.out.println("[SUCCESS] liena " + linea + " [ok] " + val_peek(0).dval);}
 break;
 case 5:
-//#line 23 "../../../../../../src/main/resources/byaccj/gramatica2.y"
+//#line 27 "../../../../../../src/main/resources/byaccj/gramatica1.y"
+{ yyval.dval = (val_peek(2).dval + val_peek(0).dval); }
+break;
+case 6:
+//#line 28 "../../../../../../src/main/resources/byaccj/gramatica1.y"
+{ yyval.dval = (val_peek(2).dval - val_peek(0).dval); }
+break;
+case 8:
+//#line 32 "../../../../../../src/main/resources/byaccj/gramatica1.y"
+{yyval.dval  = (val_peek(2).dval * val_peek(0).dval);}
+break;
+case 9:
+//#line 33 "../../../../../../src/main/resources/byaccj/gramatica1.y"
 {yyval.dval  = (val_peek(2).dval / val_peek(0).dval);}
 break;
-//#line 374 "Parser.java"
+//#line 433 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

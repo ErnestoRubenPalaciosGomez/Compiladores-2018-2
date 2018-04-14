@@ -1,0 +1,2 @@
+El resultado de la evaluación de la expresión 3-2+8 es -7 con una gramatica y 9 con la otra por que al momento de ir evaluando como lo evalua de abajo hacia arriba 
+una primero hace (3-2) y luego luego le suma el 8 y la otra primero hace (8+2) y luego lo que salio se lo resta a 3 

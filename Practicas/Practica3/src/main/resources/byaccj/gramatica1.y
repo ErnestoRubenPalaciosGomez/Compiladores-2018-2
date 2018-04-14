@@ -4,7 +4,7 @@
 %}
 
 
-      
+%token NL
 %token <dval> NUM 
 
 %type <dval> exp
@@ -14,6 +14,16 @@
 %left '*' '/'
      
 %%
+
+input:   /* empty string */
+       | input line
+       ;
+
+
+line :  exp NL { linea++;  System.out.println("[SUCCESS] liena " + linea + " [ok] " + $1);}
+       | exp   { linea++;  System.out.println("[SUCCESS] liena " + linea + " [ok] " + $1);}
+       ;
+
 exp  : texp '+' exp { $$ = ($1 + $3); }
      | texp '-' exp { $$ = ($1 - $3); }
      | texp
@@ -22,11 +32,13 @@ exp  : texp '+' exp { $$ = ($1 + $3); }
 texp  :  fexp '*' texp {$$  = ($1 * $3);}
       |  fexp '/' texp {$$  = ($1 / $3);}
       | fexp
+      ;
 
 fexp : NUM;
 %%
 
   private Yylex lexer;
+  public static short linea = 0 ;
 
   private int yylex () {
     int yyl_return = -1;
@@ -57,10 +69,9 @@ fexp : NUM;
     yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
     yyparser.yydebug = true;
     int condicion = yyparser.yyparse();
-    if(condicion == 0){
-        System.out.println("[ok]" + yyparser.yyval.dval);
-    }else{
-        System.err.print ("[ERROR] ");
-        yyparser.yyerror("La expresión aritmética no esta bien formada.");
-    }  
+    if(condicion != 0){
+      linea++;
+      System.err.print ("[ERROR] ");
+      yyparser.yyerror("La expresión aritmética no esta bien formada. en la linea " + linea);
+    }
   }

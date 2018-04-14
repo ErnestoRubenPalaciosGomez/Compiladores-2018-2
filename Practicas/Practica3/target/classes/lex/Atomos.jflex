@@ -14,6 +14,7 @@ package com.mycompany.practica_3;
 %}
 
 NUM = (-)?[0-9]+ ("." [0-9]+)?
+NL = "\n" | "\r"  | "\r\n"
 
 %%
 
@@ -21,6 +22,8 @@ NUM = (-)?[0-9]+ ("." [0-9]+)?
 "-" | 
 "*" | 
 "/"     { return (int) yycharat(0); }
+
+{NL}   {return Parser.NL;}
 
 {NUM}  { yyparser.yylval = new ParserVal(Double.parseDouble(yytext()));
          return Parser.NUM; }
