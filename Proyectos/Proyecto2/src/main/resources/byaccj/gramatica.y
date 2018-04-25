@@ -74,7 +74,7 @@ suite1 : SALTO;
 
 suite2 : suite2 stmt | stmt;
 
-test: or_test ;
+test: or_test;
 
 or_test : and_test | or_test1 or_test;
 
@@ -84,7 +84,7 @@ and_test : not_test | and_test1 and_test;
 
 and_test1 : not_test AND;
 
-not_test : not_test1 not_test | camparison;
+not_test : not_test1 not_test | comparison;
 
 not_test1 : NOT;
 
