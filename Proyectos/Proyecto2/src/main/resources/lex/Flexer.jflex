@@ -126,7 +126,7 @@ public int VerificaPalabra(String palabra){
     case "else": return Parser.ELSE;
     case "elif": return Parser.ELIF;
     case "print": return Parser.PRINT;
-    default: return -1;
+    default: return -3;
     
     }
 }
@@ -153,7 +153,7 @@ public int VerificaOperador(String operador){
             return Parser.IGUAL_IGUAL;
         case "!=":
             return Parser.DIFERENTE;
-        default: return -1;
+        default: return -4;
 
 
 
