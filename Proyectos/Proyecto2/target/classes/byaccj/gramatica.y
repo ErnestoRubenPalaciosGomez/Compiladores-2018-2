@@ -16,7 +16,7 @@ file_input: file_input1 | file_input SALTO
 file_input1 : stmt | file_input stmt;
 
 stmt : simple_stmt 
-     | compound_stmt 
+     | compound_stmt
      ;
 
 simple_stmt : small_stmt SALTO;
@@ -39,6 +39,7 @@ print_stmt1 : PRINT
 
 compound_stmt : if_stmt
               | while_stmt
+              | for_stmt
               ;
 
 
@@ -51,12 +52,13 @@ if_stmt1 : if_stmt2 test ':'
 if_stmt2 : IF
          ;
 
-if_stmt3 : if_stmt4 ELSE ':'
+if_stmt3 : if_stmt4 if_stmt5 ':'
          ;
 
 if_stmt4 : if_stmt1 suite
          ;
 
+if_stmt5 : ELSE | ELIF;
 
 while_stmt : while_stmt1 suite
            ;
@@ -65,6 +67,15 @@ while_stmt1 : while_stmt2 test ':'
             ;
 
 while_stmt2 : WHILE
+            ;
+
+for_stmt : for_stmt1 suite
+           ;
+
+for_stmt1 : for_stmt2 test ':'
+            ;
+
+for_stmt2 : FOR
             ;
 
 suite : simple_stmt | suite5 suite3 DEINDENTA; 

@@ -16,7 +16,7 @@ import java.io.*;
     this(r);
     this.yyparser = yyparser;
   }
-
+    static boolean llego_final = true;
     /* Acumula todos los átomos de DEINDENTA que deben ser devueltos  */
     static int dedents = 0;
     static int indents = 0;
@@ -172,13 +172,19 @@ BOOLEANO		=	("True" | "False")
 
 					}
 }
-<<EOF>>                                   { this.indentacion(0);
-					    if(dedents > 0){
-					      dedents--;
-					      return Parser.DEINDENTA;
-					    }else{
-                                              return 0;
-				            }
+<<EOF>>                                   { 
+                                            if(llego_final){
+                                                llego_final = false;
+                                                return Parser.SALTO;
+                                            }else{
+                                                this.indentacion(0);
+                                                if(dedents > 0){
+                                                  dedents--;
+                                                  return Parser.DEINDENTA;
+                                                }else{
+                                                  return 0;
+                                                }
+                                            }
 					  }
 
 [^]					{ System.out.println("Error de sintáxis: caractér inválido: " + yytext() + "\nLínea "+(yyline+1));
