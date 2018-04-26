@@ -118,7 +118,7 @@ REAL			= 	{ENTERO}? {PUNTO} {ENTERO} | {ENTERO} {PUNTO} {ENTERO}?
 RESERVADA         	=       ("and" | "not" | "while" | "for" |  "elif" | "or" | "else" | "if" | "print")
 OPERADOR  		=       ("+" | "-" | "*" | "**" | "/" | "//" | "%" |
 			         "<" | ">" | "<=" | ">=" | "==" | "!=" | "=" )
-SEPARADOR  		=       ":" 
+SEPARADOR  		=       ":" | "("| ")" 
 SALTO          	        =        "\n"
 IDENTIFICADOR       	= 	([:letter:] | "_" )([:letter:] | "_" | [0-9])*
 ESC              	= 	(\\)

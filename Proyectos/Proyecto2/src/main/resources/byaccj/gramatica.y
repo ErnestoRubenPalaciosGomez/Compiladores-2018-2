@@ -58,7 +58,7 @@ if_stmt3 : if_stmt4 if_stmt5 ':'
 if_stmt4 : if_stmt1 suite
          ;
 
-if_stmt5 : ELSE | ELIF;
+if_stmt5 : ELSE;
 
 while_stmt : while_stmt1 suite
            ;
@@ -127,7 +127,11 @@ power : power1 factor | atom;
 
 power1 : atom POW;
 
-atom :  IDENTIFICADOR | ENTERO | CADENA | REAL  | BOOLEANO;
+atom :  IDENTIFICADOR | ENTERO | CADENA | REAL  | BOOLEANO |atom1 ')';
+
+atom1 : atom2 test;
+
+atom2: '(';
         
 %%
 

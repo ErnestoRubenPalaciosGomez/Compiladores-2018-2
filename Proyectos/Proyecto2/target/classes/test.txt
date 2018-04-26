@@ -1,6 +1,6 @@
 # FizzBuzz
 indice = 1
-while indice < 31:
+while (indice < 31):
    otro = True
    if indice % 3 == 0:
       print "fizz"
