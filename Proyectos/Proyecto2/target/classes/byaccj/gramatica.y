@@ -4,14 +4,12 @@
 %}
 
 
-%token SALTO OR WHILE FOR NOT AND IF PRINT ELSE BOOLEANO ENTERO REAL IDENTIFICADOR ELIF CADENA POW MENOR_IGUAL MAYOR_IGUAL DIVISION_SUELO IGUAL_IGUAL DIFERENTE  ENDMARKER
+%token SALTO OR WHILE FOR NOT AND IF PRINT ELSE BOOLEANO ENTERO REAL IDENTIFICADOR ELIF CADENA POW MENOR_IGUAL MAYOR_IGUAL DIVISION_SUELO IGUAL_IGUAL DIFERENTE SALTOINDENTA SALTODEINDENTA
 
-%left '-' '+'
-%left '*' '/'
      
 %%
 
-file_input: | file_input1 | SALTO | file_input SALTO
+file_input: | file_input1 | SALTO | file_input SALTO 
             ; 
 
 file_input1 : stmt | file_input stmt;
@@ -20,7 +18,7 @@ stmt : simple_stmt
      | compound_stmt
      ;
 
-simple_stmt : small_stmt
+simple_stmt : small_stmt SALTO | small_stmt
             ;
 
 small_stmt : expr_stmt 
@@ -68,11 +66,15 @@ while_stmt1 : while_stmt2 test ':'
 while_stmt2 : WHILE
             ;
 
-suite : simple_stmt | suite1 suite2;
+suite : simple_stmt | suite5 suite3 DEINDENTA; 
 
-suite1 : SALTO;
+suite2 : suite2 stmt | stmt ;
 
-suite2 : suite2 stmt | stmt;
+suite3 : suite4 suite2;
+
+suite4 : INDENTA;
+
+suite5 : SALTO;
 
 test: or_test;
 
@@ -112,7 +114,7 @@ power : power1 factor | atom;
 
 power1 : atom POW;
 
-atom :  IDENTIFICADOR | ENTERO | CADENA | REAL  | BOOLEANO  | test;
+atom :  IDENTIFICADOR | ENTERO | CADENA | REAL  | BOOLEANO;
 
 
 
