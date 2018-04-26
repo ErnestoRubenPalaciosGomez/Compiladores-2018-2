@@ -4,22 +4,23 @@
 %}
 
 
-%token SALTO OR WHILE FOR NOT AND IF PRINT ELSE BOOLEANO ENTERO REAL IDENTIFICADOR ELIF CADENA POW MENOR_IGUAL MAYOR_IGUAL DIVISION_SUELO IGUAL_IGUAL DIFERENTE SALTOINDENTA SALTODEINDENTA
+%token SALTO OR WHILE FOR NOT AND IF PRINT ELSE BOOLEANO ENTERO REAL IDENTIFICADOR ELIF CADENA POW MENOR_IGUAL MAYOR_IGUAL DIVISION_SUELO IGUAL_IGUAL DIFERENTE INDENTA DEINDENTA
 
-     
 %%
 
-file_input: | file_input1 | SALTO | file_input SALTO 
+input_file :  | file_input;
+
+file_input: file_input1 | file_input SALTO
             ; 
 
 file_input1 : stmt | file_input stmt;
 
 stmt : simple_stmt 
-     | compound_stmt
+     | compound_stmt 
      ;
 
-simple_stmt : small_stmt SALTO | small_stmt
-            ;
+simple_stmt : small_stmt SALTO;
+
 
 small_stmt : expr_stmt 
            | print_stmt 
@@ -90,36 +91,33 @@ not_test : not_test1 not_test | comparison;
 
 not_test1 : NOT;
 
-comparison: expr comparison1 | expr;
+comparison: expr | comparison1 expr;
 
-comparison1 : comparison1 comp_op expr | comp_op expr ;
+comparison1 : comparison comp_op;
+
 
 comp_op : '<' | '>' | IGUAL_IGUAL | MENOR_IGUAL | MAYOR_IGUAL | DIFERENTE;
 
-expr : term | term expr1 ;
+expr : term | term expr1;
 
-expr1 : expr1 op term | op term;
+expr1: op expr;
 
-op : '+' | '-';
+op : '-' | '+';
 
-term : factor | factor term1 ;
+term : factor | term1 factor  ;
 
-term1 : term1 op1 factor | op1 factor;
+term1 : term op1;
 
 op1 : '*' | '/' | '%' | DIVISION_SUELO;
 
-factor : power | op factor;
+factor : power |op factor ;
 
 power : power1 factor | atom;
 
 power1 : atom POW;
 
 atom :  IDENTIFICADOR | ENTERO | CADENA | REAL  | BOOLEANO;
-
-
-
-
-            
+        
 %%
 
   private AnalizadorLexico lexer;
