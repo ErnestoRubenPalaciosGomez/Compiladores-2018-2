@@ -99,6 +99,16 @@ import java.io.*;
         }
 
     }
+    //Funcion que verifica que la cadena este bien formada
+    public void VerificaCadena(String cadena){
+        String cadena_aux = cadena.substring(1, cadena.length()-1); // hace una subcadena que empieza en 1 al final de la linea
+        if(cadena_aux.contains("\"") || cadena.contains("\\")){ // verifica si la cadena tiene comillas o tiene una diagonal
+            System.out.print("Error: Cadena mal Formada en la linea " + (yyline+1)); // se le agrega mensaje de error a la salida 
+            System.exit(0);
+        }else{
+           System.out.print( "CADENA(" + cadena_aux + ")");
+        }
+    }
 %}
 PUNTO			=	\.
 DIGIT           	=       [0-9]
@@ -112,17 +122,18 @@ SEPARADOR  		=       ":"
 SALTO          	        =        "\n"
 IDENTIFICADOR       	= 	([:letter:] | "_" )([:letter:] | "_" | [0-9])*
 ESC              	= 	(\\)
-CHAR_LITERAL   	        = 	([:letter:] | [:digit:] | "_" | "$" | " " | "#" | {OPERADOR} | {SEPARADOR}) | "\\"
-COMENTARIO 		=     	"#".*{SALTO}
+CHAR_LITERAL   	        = 	([:letter:] | [:digit:] | "_" | "$" | " " | "#" | {OPERADOR} | {SEPARADOR}) | "\\" | [A-Z]
+COMENTARIO 		=     	(" " | "\t")*"#" {CHAR_LITERAL}*{SALTO}? 
 BOOLEANO		=	("True" | "False")
 %%
-{COMENTARIO}      			{}
+{COMENTARIO}      			{System.out.println ( "COMENTARIO ("+yytext()+")");}
 <CADENA>{
-  {CHAR_LITERAL}*\"			{ System.out.print("CADENA(" + yytext().substring(0,yylength()-1) +  ")");
+  ~\"                                  { VerificaCadena(yytext());
   					 yybegin(CODIGO); return Parser.CADENA;}
   {SALTO}				{ System.out.println("Cadena mal construida, linea " + (yyline+1) ); System.exit(1);}
 }
 <YYINITIAL>{
+  
   " "+                        		{ System.out.println("Error de indentación. Línea " + (yyline+1) ); System.exit(1);}
   .                               	{ yypushback(1); yybegin(CODIGO);}
 }
