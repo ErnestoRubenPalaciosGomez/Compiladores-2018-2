@@ -29,7 +29,7 @@ small_stmt : expr_stmt {$$ = $1;}
            ;
 
 expr_stmt : test {$$ = $1;}
-          | test '=' test {$$ = new AsigNodo($1 , $2);}
+          | test '=' test {$$ = new AsigNodo($1 , $2); System.out.println("Entre a asign");}
           ;
 
 print_stmt : PRINT test {$$ = new NodoPrint($1);}
@@ -39,24 +39,11 @@ compound_stmt : if_stmt {$$ = $1;}
               | while_stmt {$$ = $1;}
               ;
 
-if_stmt : if_stmt1 suite | if_stmt3  suite
+if_stmt : IF test ':' suite ELSE ':' suite {$2.agregaHijoFinal($4); $2.agregaHijoFinal($6); $$ = new IfStmts($1);}
+        | IF test ':' suite  {$2.agregaHijoFinal($4); $$ = new IfStmts($1);}
         ;
 
-if_stmt1 : if_stmt2 test ':'
-         ;
-
-if_stmt2 : IF
-         ;
-
-if_stmt3 : if_stmt4 if_stmt5 ':'
-         ;
-
-if_stmt4 : if_stmt1 suite
-         ;
-
-if_stmt5 : ELSE;
-
-while_stmt : WHILE test ':' suite
+while_stmt : WHILE test ':' suite {$$ = new WhileNodo($2 , $4);}
            ;
 
 suite : simple_stmt {$$ = $1;}
@@ -89,7 +76,7 @@ not_test : NOT not_test {$$ = new NotNodo($1);}
          ;
 
 comparison: expr {$$ = $1;}
-         | comparison1 expr;
+         | comparison1 expr {$1.agregaHijoFinal($2); $$ = $1;};
 
 comparison1 : expr '<' {$$ = new MenorNodo($1 , null);}
             | expr '>' {$$ = new MayorNodo($1 , null);}
@@ -134,8 +121,8 @@ power : atom POW factor {$$ = new PowNodo($1 , $2);}
       | atom {$$ = $1;};
 
 
-atom :  IDENTIFICADOR {$$ = $1;}
-     | ENTERO {$$ = $1;}
+atom :  IDENTIFICADOR {$$ = $1; System.out.println("Es un identidficador");}
+     | ENTERO {$$ = $1; System.out.println("Es un entero");}
      | CADENA {$$ = $1;}
      | REAL  {$$ = $1;}
      | BOOLEANO {$$ = $1;}

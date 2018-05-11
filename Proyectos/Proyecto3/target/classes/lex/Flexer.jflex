@@ -106,8 +106,6 @@ import ast.patron.compuesto.*;
         if(cadena_aux.contains("\"") || cadena.contains("\\")){ // verifica si la cadena tiene comillas o tiene una diagonal
             System.out.print("Error: Cadena mal Formada en la linea " + (yyline+1)); // se le agrega mensaje de error a la salida 
             System.exit(0);
-        }else{
-           System.out.print( "CADENA(" + cadena_aux + ")");
         }
     }
 
@@ -132,7 +130,7 @@ CHAR_LITERAL   	        = 	([:letter:] | [:digit:] | "_" | "$" | " " | "#" | {OP
 COMENTARIO 		=     	(" " | "\t")*"#" {CHAR_LITERAL}*{SALTO}? 
 BOOLEANO		=	("True" | "False")
 %%
-{COMENTARIO}      			{System.out.println ( "COMENTARIO ("+yytext()+")");}
+{COMENTARIO}      			{}
 <CADENA>{
   ~\"                                  { VerificaCadena(yytext());
   					 yybegin(CODIGO); 

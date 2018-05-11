@@ -20,22 +20,23 @@ public class Nodo
     }
 
     public void setHijo(Nodo c){
+        
     }
 
     public Nodo getUltimoHijo(){
-	return null;
+	return hijos.getUltimoHijo();
     }
 
     public Nodo getPrimerHijo(){
-	return null;
+	return hijos.getPrimerHijo();
     }
 
     public void agregaHijoFinal(Nodo r){
-
+        hijos.agregaHijoFinal(r);
     }
 
     public void agregaHijoPrincipio(Nodo r){
-
+        hijos.agregaHijoPrincipio(r);
     }
 
     public Variable getValor(){
@@ -59,7 +60,9 @@ public class Nodo
     }
 
     public void accept(Visitor v){
+        System.out.println("entre al visitor del nodo");
      	v.visit(this);
+        
     }
 
 }

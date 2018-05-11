@@ -26,18 +26,21 @@ public class Compilador{
     }
 
     public void imprimeAST(){
-        parser.raiz.accept(v_print);
+        System.out.println("El valor es : " + parser.yylval);
+        //parser.yylval.accept(v_print);
+        //System.out.println(raízAST.getHijos().size());
+        //raízAST.accept(v_print);
+        
+        //v_print.visit(raízAST);
     }
 
     public static void main(String[] args){
         String archivo = "src/main/resources/test.txt";
-        double f = 1.;    
-        System.out.println(f);
         try{
             Reader a = new FileReader(archivo);
             Compilador c  = new Compilador(a);
-            //c.ConstruyeAST(true);
-            //c.imprimeAST();
+            c.ConstruyeAST(false);
+            c.imprimeAST();
         }catch(FileNotFoundException e){
             System.err.println("El archivo " + archivo +" no fue encontrado. ");
         }catch(ArrayIndexOutOfBoundsException e){
