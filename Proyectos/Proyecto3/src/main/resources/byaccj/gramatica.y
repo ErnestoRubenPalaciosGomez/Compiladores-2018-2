@@ -5,7 +5,7 @@
 %}
 
 
-%token SALTO OR WHILE FOR NOT AND IF PRINT ELSE BOOLEANO ENTERO REAL IDENTIFICADOR ELIF CADENA POW MENOR_IGUAL MAYOR_IGUAL DIVISION_ENTERA IGUAL_IGUAL DIFERENTE INDENTA DEINDENTA
+%token SALTO OR WHILE NOT AND IF PRINT ELSE BOOLEANO ENTERO REAL IDENTIFICADOR  CADENA POW MENOR_IGUAL MAYOR_IGUAL DIVISION_ENTERA IGUAL_IGUAL DIFERENTE INDENTA DEINDENTA
 
 %%
 
@@ -71,7 +71,7 @@ and_test1 : not_test AND {$$ = new AndNodo($1 , null);}
           | and_test1 not_test AND {$1.agregaHijoFinal($2); $$ = new AndNodo($1 , null);}
           ;
 
-not_test : NOT not_test {$$ = new NotNodo($1);}
+not_test : NOT not_test {$$ = new NotNodo($2);}
          | comparison {$$ = $1;}
          ;
 
@@ -117,7 +117,7 @@ factor : power {$$ = $1;}
        | '+' factor {$$ = new AddNodo(null , $1);} 
        ;
 
-power : atom POW factor {$$ = new PowNodo($1 , $2);}
+power : atom POW factor {$$ = new PowNodo($1 , $3);}
       | atom {$$ = $1;};
 
 

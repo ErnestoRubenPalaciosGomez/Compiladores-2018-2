@@ -748,7 +748,7 @@ case 32:
 break;
 case 33:
 //#line 74 "../../../../../../src/main/resources/byaccj/gramatica.y"
-{yyval = new NotNodo(val_peek(1));}
+{yyval = new NotNodo(val_peek(0));}
 break;
 case 34:
 //#line 75 "../../../../../../src/main/resources/byaccj/gramatica.y"
@@ -888,7 +888,7 @@ case 67:
 break;
 case 68:
 //#line 120 "../../../../../../src/main/resources/byaccj/gramatica.y"
-{yyval = new PowNodo(val_peek(2) , val_peek(1));}
+{yyval = new PowNodo(val_peek(2) , val_peek(0));}
 break;
 case 69:
 //#line 121 "../../../../../../src/main/resources/byaccj/gramatica.y"
