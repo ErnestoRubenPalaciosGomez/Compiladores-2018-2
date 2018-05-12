@@ -7,7 +7,6 @@ public class NodoBinario extends Compuesto
         super();
 	this.agregaHijoPrincipio(l);
 	this.agregaHijoFinal(r);
-        System.out.println("Entre al Nodo Binario");
     }
 
     public NodoBinario(Nodo l){

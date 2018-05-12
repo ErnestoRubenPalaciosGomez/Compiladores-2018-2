@@ -468,23 +468,7 @@ final static String yyrule[] = {
   public Parser(Reader r) {
     lexer = new AnalizadorLexico(r, this);
   }
-
-
-  public static void main(String args[]) throws IOException {
-    Parser yyparser;
-    yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
-    yyparser.yydebug = true;
-    int condicion = yyparser.yyparse();
-    if(condicion != 0){
-      linea++;
-      System.err.print ("[ERROR] ");
-      yyparser.yyerror("Expresion mal fomrada");
-    }else{
-        System.out.println ("[OK] Expresion bien formada");
-
-    }
-  }
-//#line 424 "Parser.java"
+//#line 408 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -640,7 +624,7 @@ boolean doaction;
 //########## USER-SUPPLIED ACTIONS ##########
 case 1:
 //#line 12 "../../../../../../src/main/resources/byaccj/gramatica.y"
-{raiz = yyval; System.out.println("Reconocimiento Exitoso");}
+{System.out.println("Reconocimiento Exitoso");}
 break;
 case 2:
 //#line 13 "../../../../../../src/main/resources/byaccj/gramatica.y"
@@ -684,11 +668,11 @@ case 12:
 break;
 case 13:
 //#line 32 "../../../../../../src/main/resources/byaccj/gramatica.y"
-{yyval = new AsigNodo(val_peek(2) , val_peek(1)); System.out.println("Entre a asign");}
+{yyval = new AsigNodo(val_peek(2) , val_peek(0));}
 break;
 case 14:
 //#line 35 "../../../../../../src/main/resources/byaccj/gramatica.y"
-{yyval = new NodoPrint(val_peek(1));}
+{yyval = new NodoPrint(val_peek(0));}
 break;
 case 15:
 //#line 38 "../../../../../../src/main/resources/byaccj/gramatica.y"
@@ -700,11 +684,11 @@ case 16:
 break;
 case 17:
 //#line 42 "../../../../../../src/main/resources/byaccj/gramatica.y"
-{val_peek(5).agregaHijoFinal(val_peek(3)); val_peek(5).agregaHijoFinal(val_peek(1)); yyval = new IfStmts(val_peek(6));}
+{yyval = new IfNodo(val_peek(5) , val_peek(3) , val_peek(0));}
 break;
 case 18:
 //#line 43 "../../../../../../src/main/resources/byaccj/gramatica.y"
-{val_peek(2).agregaHijoFinal(val_peek(0)); yyval = new IfStmts(val_peek(3));}
+{yyval = new IfNodo(val_peek(2) , val_peek(0));}
 break;
 case 19:
 //#line 46 "../../../../../../src/main/resources/byaccj/gramatica.y"
@@ -912,7 +896,7 @@ case 69:
 break;
 case 70:
 //#line 124 "../../../../../../src/main/resources/byaccj/gramatica.y"
-{yyval = val_peek(0); System.out.println("Es un identidficador");}
+{yyval = val_peek(0);}
 break;
 case 71:
 //#line 125 "../../../../../../src/main/resources/byaccj/gramatica.y"
@@ -934,7 +918,7 @@ case 75:
 //#line 129 "../../../../../../src/main/resources/byaccj/gramatica.y"
 {yyval = val_peek(1);}
 break;
-//#line 869 "Parser.java"
+//#line 853 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

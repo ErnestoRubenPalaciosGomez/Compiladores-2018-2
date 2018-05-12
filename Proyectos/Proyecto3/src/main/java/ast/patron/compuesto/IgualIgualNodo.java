@@ -5,6 +5,8 @@
  */
 package ast.patron.compuesto;
 
+import ast.patron.visitante.Visitor;
+
 /**
  *
  * @author Ernesto Palacios
@@ -15,4 +17,7 @@ public class IgualIgualNodo extends NodoBinario{
 	super(l,r);
     }
     
+    public void accept(Visitor v){
+     	v.visit(this);
+    }
 }

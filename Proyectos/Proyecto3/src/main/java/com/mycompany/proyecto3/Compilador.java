@@ -27,6 +27,8 @@ public class Compilador{
 
     public void imprimeAST(){
         System.out.println("El valor es : " + parser.yylval);
+        System.out.println("El valor de la raiz es : " + parser.raiz);
+        parser.raiz.accept(v_print);
         //parser.yylval.accept(v_print);
         //System.out.println(raízAST.getHijos().size());
         //raízAST.accept(v_print);

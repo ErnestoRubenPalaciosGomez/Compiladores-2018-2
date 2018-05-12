@@ -278,17 +278,6 @@ public class VisitorPrint implements Visitor
         }        
         System.out.print("]"); 
     }
-    
-    public void visit(Hoja n){
-        for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
-            Nodo hijo = (Nodo) i.next();
-            System.out.print("[");
-            if ( hijo != null){
-                hijo.accept(this);    
-            }    
-            System.out.println("]");
-        }
-    }
     public void visit(IdentifierHoja n){
 	System.out.print("[Hoja Identificador] id: "+ n.getNombre());
     }
@@ -296,16 +285,15 @@ public class VisitorPrint implements Visitor
 	System.out.print("[Hoja Entera] valor: " + n.getValor().ival);
     }
     public void visit(RealHoja n){
-        System.out.print("[Hoja Real] valor: " + n.getValor().ival);
+        System.out.print("[Hoja Real] valor: " + n.getValor().dval);
     }
     public void visit(BooleanHoja n){
-        System.out.print("[Hoja Booleano] valor: " + n.getValor().ival);
+        System.out.print("[Hoja Booleano] valor: " + n.getValor().bval);
     }
     public void visit(CadenaHoja n){
-        System.out.print("[Hoja Cadena] valor: " + n.getValor().ival);
+        System.out.print("[Hoja Cadena] valor: " + n.getValor().sval);
     }
     public void visit(Nodo n){
-        System.out.println("Entre a pintar el nodo");
         for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
             Nodo hijo = (Nodo) i.next();
             System.out.print("[");
@@ -314,7 +302,6 @@ public class VisitorPrint implements Visitor
             }    
             System.out.println("]");
         }
-        System.out.println("Sali de pintar el nodo");
     }
     public void visit(NodoBinario n){
         System.out.print("[");
@@ -327,6 +314,29 @@ public class VisitorPrint implements Visitor
             n.getUltimoHijo().accept(this);
         }          
         System.out.println("]");     
+    }
+    
+    public void visit(IfNodo n){
+        System.out.print("[if]");
+        System.out.print("[");
+        if(n.getPrimerHijo() != null){
+            n.getPrimerHijo().accept(this);
+        }        
+        System.out.print("]");
+        System.out.print("[");
+        if( n.getHijos().getAll().get(1) != null){
+            n.getHijos().getAll().get(1).accept(this);
+        }         
+        System.out.println("]"); 
+        if(n.getHijos().size() == 3){
+            System.out.print("[else]");
+            System.out.print("[");
+            if( n.getHijos().getAll().get(2) != null){
+                n.getHijos().getAll().get(2).accept(this);
+            }          
+            System.out.println("]"); 
+        }
+
     }
     
 }

@@ -60,7 +60,6 @@ public class Nodo
     }
 
     public void accept(Visitor v){
-        System.out.println("entre al visitor del nodo");
      	v.visit(this);
         
     }

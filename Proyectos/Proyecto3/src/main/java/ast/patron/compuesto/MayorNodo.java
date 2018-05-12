@@ -1,5 +1,7 @@
 package ast.patron.compuesto;
 
+import ast.patron.visitante.Visitor;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,4 +18,7 @@ public class MayorNodo extends NodoBinario{
 	super(l,r);
     }
     
+    public void accept(Visitor v){
+     	v.visit(this);
+    }
 }

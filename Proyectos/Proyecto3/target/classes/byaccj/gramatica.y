@@ -9,7 +9,7 @@
 
 %%
 
-input_file : /*cadena vacia*/ {raiz = $$; System.out.println("Reconocimiento Exitoso");}
+input_file : /*cadena vacia*/ {System.out.println("Reconocimiento Exitoso");}
            | file_input {raiz = $1; System.out.println("Reconocimiento Exitoso");};
 
 file_input: SALTO 
@@ -29,18 +29,18 @@ small_stmt : expr_stmt {$$ = $1;}
            ;
 
 expr_stmt : test {$$ = $1;}
-          | test '=' test {$$ = new AsigNodo($1 , $2); System.out.println("Entre a asign");}
+          | test '=' test {$$ = new AsigNodo($1 , $3);}
           ;
 
-print_stmt : PRINT test {$$ = new NodoPrint($1);}
+print_stmt : PRINT test {$$ = new NodoPrint($2);}
            ;
 
 compound_stmt : if_stmt {$$ = $1;}
               | while_stmt {$$ = $1;}
               ;
 
-if_stmt : IF test ':' suite ELSE ':' suite {$2.agregaHijoFinal($4); $2.agregaHijoFinal($6); $$ = new IfStmts($1);}
-        | IF test ':' suite  {$2.agregaHijoFinal($4); $$ = new IfStmts($1);}
+if_stmt : IF test ':' suite ELSE ':' suite {$$ = new IfNodo($2 , $4 , $7);}
+        | IF test ':' suite  {$$ = new IfNodo($2 , $4);}
         ;
 
 while_stmt : WHILE test ':' suite {$$ = new WhileNodo($2 , $4);}
@@ -58,7 +58,7 @@ test: or_test {$$ = $1;};
 
 or_test : and_test {$$ = $1;}
         | or_test1 and_test {$1.agregaHijoFinal($2); $$ = $1;};
-
+        
 or_test1 : and_test OR {$$ = new OrNodo($1 , null);}
          | or_test1 and_test OR {$1.agregaHijoFinal($2); $$ = new OrNodo($1 , null);}
          ;
@@ -121,8 +121,8 @@ power : atom POW factor {$$ = new PowNodo($1 , $2);}
       | atom {$$ = $1;};
 
 
-atom :  IDENTIFICADOR {$$ = $1; System.out.println("Es un identidficador");}
-     | ENTERO {$$ = $1; System.out.println("Es un entero");}
+atom :  IDENTIFICADOR {$$ = $1;}
+     | ENTERO {$$ = $1;}
      | CADENA {$$ = $1;}
      | REAL  {$$ = $1;}
      | BOOLEANO {$$ = $1;}
@@ -158,20 +158,4 @@ atom :  IDENTIFICADOR {$$ = $1; System.out.println("Es un identidficador");}
 
   public Parser(Reader r) {
     lexer = new AnalizadorLexico(r, this);
-  }
-
-
-  public static void main(String args[]) throws IOException {
-    Parser yyparser;
-    yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
-    yyparser.yydebug = true;
-    int condicion = yyparser.yyparse();
-    if(condicion != 0){
-      linea++;
-      System.err.print ("[ERROR] ");
-      yyparser.yyerror("Expresion mal fomrada");
-    }else{
-        System.out.println ("[OK] Expresion bien formada");
-
-    }
   }
