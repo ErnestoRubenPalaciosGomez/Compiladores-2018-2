@@ -1,0 +1,1415 @@
+   0  $accept : input_file $end
+
+   1  input_file :
+   2             | file_input
+
+   3  file_input : SALTO
+   4             | stmt
+   5             | file_input SALTO
+   6             | file_input stmt
+
+   7  stmt : simple_stmt
+   8       | compound_stmt
+
+   9  simple_stmt : small_stmt SALTO
+
+  10  small_stmt : expr_stmt
+  11             | print_stmt
+
+  12  expr_stmt : test
+  13            | test '=' test
+
+  14  print_stmt : PRINT test
+
+  15  compound_stmt : if_stmt
+  16                | while_stmt
+
+  17  if_stmt : IF test ':' suite ELSE ':' suite
+  18          | IF test ':' suite
+
+  19  while_stmt : WHILE test ':' suite
+
+  20  suite : simple_stmt
+  21        | SALTO INDENTA suite1 DEINDENTA
+
+  22  suite1 : stmt
+  23         | suite1 stmt
+
+  24  test : or_test
+
+  25  or_test : and_test
+  26          | or_test1 and_test
+
+  27  or_test1 : and_test OR
+  28           | or_test1 and_test OR
+
+  29  and_test : not_test
+  30           | and_test1 not_test
+
+  31  and_test1 : not_test AND
+  32            | and_test1 not_test AND
+
+  33  not_test : NOT not_test
+  34           | comparison
+
+  35  comparison : expr
+  36             | comparison1 expr
+
+  37  comparison1 : expr '<'
+  38              | expr '>'
+  39              | expr IGUAL_IGUAL
+  40              | expr MENOR_IGUAL
+  41              | expr MAYOR_IGUAL
+  42              | expr DIFERENTE
+  43              | comparison1 expr '<'
+  44              | comparison1 expr '>'
+  45              | comparison1 expr IGUAL_IGUAL
+  46              | comparison1 expr MENOR_IGUAL
+  47              | comparison1 expr MAYOR_IGUAL
+  48              | comparison1 expr DIFERENTE
+
+  49  expr : term
+  50       | expr1 term
+
+  51  expr1 : term '+'
+  52        | term '-'
+  53        | expr1 term '+'
+  54        | expr1 term '-'
+
+  55  term : factor
+  56       | term1 factor
+
+  57  term1 : factor '*'
+  58        | factor DIVISION_ENTERA
+  59        | factor '%'
+  60        | factor '/'
+  61        | term1 factor '*'
+  62        | term1 factor DIVISION_ENTERA
+  63        | term1 factor '%'
+  64        | term1 factor '/'
+
+  65  factor : power
+  66         | '-' factor
+  67         | '+' factor
+
+  68  power : atom POW factor
+  69        | atom
+
+  70  atom : IDENTIFICADOR
+  71       | ENTERO
+  72       | CADENA
+  73       | REAL
+  74       | BOOLEANO
+  75       | '(' test ')'
+
+state 0
+	$accept : . input_file $end  (0)
+	input_file : .  (1)
+
+	SALTO  shift 1
+	WHILE  shift 2
+	NOT  shift 3
+	IF  shift 4
+	PRINT  shift 5
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	$end  reduce 1
+
+	input_file  goto 14
+	file_input  goto 15
+	stmt  goto 16
+	simple_stmt  goto 17
+	compound_stmt  goto 18
+	small_stmt  goto 19
+	expr_stmt  goto 20
+	print_stmt  goto 21
+	test  goto 22
+	if_stmt  goto 23
+	while_stmt  goto 24
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 1
+	file_input : SALTO .  (3)
+
+	.  reduce 3
+
+
+state 2
+	while_stmt : WHILE . test ':' suite  (19)
+
+	NOT  shift 3
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	test  goto 39
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 3
+	not_test : NOT . not_test  (33)
+
+	NOT  shift 3
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	not_test  goto 40
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 4
+	if_stmt : IF . test ':' suite ELSE ':' suite  (17)
+	if_stmt : IF . test ':' suite  (18)
+
+	NOT  shift 3
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	test  goto 41
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 5
+	print_stmt : PRINT . test  (14)
+
+	NOT  shift 3
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	test  goto 42
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 6
+	atom : BOOLEANO .  (74)
+
+	.  reduce 74
+
+
+state 7
+	atom : ENTERO .  (71)
+
+	.  reduce 71
+
+
+state 8
+	atom : REAL .  (73)
+
+	.  reduce 73
+
+
+state 9
+	atom : IDENTIFICADOR .  (70)
+
+	.  reduce 70
+
+
+state 10
+	atom : CADENA .  (72)
+
+	.  reduce 72
+
+
+state 11
+	factor : '+' . factor  (67)
+
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	factor  goto 43
+	power  goto 37
+	atom  goto 38
+
+
+state 12
+	factor : '-' . factor  (66)
+
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	factor  goto 44
+	power  goto 37
+	atom  goto 38
+
+
+state 13
+	atom : '(' . test ')'  (75)
+
+	NOT  shift 3
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	test  goto 45
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 14
+	$accept : input_file . $end  (0)
+
+	$end  accept
+
+
+state 15
+	input_file : file_input .  (2)
+	file_input : file_input . SALTO  (5)
+	file_input : file_input . stmt  (6)
+
+	SALTO  shift 46
+	WHILE  shift 2
+	NOT  shift 3
+	IF  shift 4
+	PRINT  shift 5
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	$end  reduce 2
+
+	stmt  goto 47
+	simple_stmt  goto 17
+	compound_stmt  goto 18
+	small_stmt  goto 19
+	expr_stmt  goto 20
+	print_stmt  goto 21
+	test  goto 22
+	if_stmt  goto 23
+	while_stmt  goto 24
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 16
+	file_input : stmt .  (4)
+
+	.  reduce 4
+
+
+state 17
+	stmt : simple_stmt .  (7)
+
+	.  reduce 7
+
+
+state 18
+	stmt : compound_stmt .  (8)
+
+	.  reduce 8
+
+
+state 19
+	simple_stmt : small_stmt . SALTO  (9)
+
+	SALTO  shift 48
+	.  error
+
+
+state 20
+	small_stmt : expr_stmt .  (10)
+
+	.  reduce 10
+
+
+state 21
+	small_stmt : print_stmt .  (11)
+
+	.  reduce 11
+
+
+state 22
+	expr_stmt : test .  (12)
+	expr_stmt : test . '=' test  (13)
+
+	'='  shift 49
+	SALTO  reduce 12
+
+
+state 23
+	compound_stmt : if_stmt .  (15)
+
+	.  reduce 15
+
+
+state 24
+	compound_stmt : while_stmt .  (16)
+
+	.  reduce 16
+
+
+state 25
+	test : or_test .  (24)
+
+	.  reduce 24
+
+
+state 26
+	or_test : and_test .  (25)
+	or_test1 : and_test . OR  (27)
+
+	OR  shift 50
+	SALTO  reduce 25
+	'='  reduce 25
+	':'  reduce 25
+	')'  reduce 25
+
+
+state 27
+	or_test : or_test1 . and_test  (26)
+	or_test1 : or_test1 . and_test OR  (28)
+
+	NOT  shift 3
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	and_test  goto 51
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 28
+	and_test : not_test .  (29)
+	and_test1 : not_test . AND  (31)
+
+	AND  shift 52
+	SALTO  reduce 29
+	OR  reduce 29
+	'='  reduce 29
+	':'  reduce 29
+	')'  reduce 29
+
+
+state 29
+	and_test : and_test1 . not_test  (30)
+	and_test1 : and_test1 . not_test AND  (32)
+
+	NOT  shift 3
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	not_test  goto 53
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 30
+	not_test : comparison .  (34)
+
+	.  reduce 34
+
+
+state 31
+	comparison : expr .  (35)
+	comparison1 : expr . '<'  (37)
+	comparison1 : expr . '>'  (38)
+	comparison1 : expr . IGUAL_IGUAL  (39)
+	comparison1 : expr . MENOR_IGUAL  (40)
+	comparison1 : expr . MAYOR_IGUAL  (41)
+	comparison1 : expr . DIFERENTE  (42)
+
+	MENOR_IGUAL  shift 54
+	MAYOR_IGUAL  shift 55
+	IGUAL_IGUAL  shift 56
+	DIFERENTE  shift 57
+	'<'  shift 58
+	'>'  shift 59
+	SALTO  reduce 35
+	OR  reduce 35
+	AND  reduce 35
+	'='  reduce 35
+	':'  reduce 35
+	')'  reduce 35
+
+
+state 32
+	comparison : comparison1 . expr  (36)
+	comparison1 : comparison1 . expr '<'  (43)
+	comparison1 : comparison1 . expr '>'  (44)
+	comparison1 : comparison1 . expr IGUAL_IGUAL  (45)
+	comparison1 : comparison1 . expr MENOR_IGUAL  (46)
+	comparison1 : comparison1 . expr MAYOR_IGUAL  (47)
+	comparison1 : comparison1 . expr DIFERENTE  (48)
+
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	expr  goto 60
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 33
+	expr : term .  (49)
+	expr1 : term . '+'  (51)
+	expr1 : term . '-'  (52)
+
+	'+'  shift 61
+	'-'  shift 62
+	SALTO  reduce 49
+	OR  reduce 49
+	AND  reduce 49
+	MENOR_IGUAL  reduce 49
+	MAYOR_IGUAL  reduce 49
+	IGUAL_IGUAL  reduce 49
+	DIFERENTE  reduce 49
+	'='  reduce 49
+	':'  reduce 49
+	'<'  reduce 49
+	'>'  reduce 49
+	')'  reduce 49
+
+
+state 34
+	expr : expr1 . term  (50)
+	expr1 : expr1 . term '+'  (53)
+	expr1 : expr1 . term '-'  (54)
+
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	term  goto 63
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 35
+	term : factor .  (55)
+	term1 : factor . '*'  (57)
+	term1 : factor . DIVISION_ENTERA  (58)
+	term1 : factor . '%'  (59)
+	term1 : factor . '/'  (60)
+
+	DIVISION_ENTERA  shift 64
+	'*'  shift 65
+	'%'  shift 66
+	'/'  shift 67
+	SALTO  reduce 55
+	OR  reduce 55
+	AND  reduce 55
+	MENOR_IGUAL  reduce 55
+	MAYOR_IGUAL  reduce 55
+	IGUAL_IGUAL  reduce 55
+	DIFERENTE  reduce 55
+	'='  reduce 55
+	':'  reduce 55
+	'<'  reduce 55
+	'>'  reduce 55
+	'+'  reduce 55
+	'-'  reduce 55
+	')'  reduce 55
+
+
+state 36
+	term : term1 . factor  (56)
+	term1 : term1 . factor '*'  (61)
+	term1 : term1 . factor DIVISION_ENTERA  (62)
+	term1 : term1 . factor '%'  (63)
+	term1 : term1 . factor '/'  (64)
+
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	factor  goto 68
+	power  goto 37
+	atom  goto 38
+
+
+state 37
+	factor : power .  (65)
+
+	.  reduce 65
+
+
+state 38
+	power : atom . POW factor  (68)
+	power : atom .  (69)
+
+	POW  shift 69
+	SALTO  reduce 69
+	OR  reduce 69
+	AND  reduce 69
+	MENOR_IGUAL  reduce 69
+	MAYOR_IGUAL  reduce 69
+	DIVISION_ENTERA  reduce 69
+	IGUAL_IGUAL  reduce 69
+	DIFERENTE  reduce 69
+	'='  reduce 69
+	':'  reduce 69
+	'<'  reduce 69
+	'>'  reduce 69
+	'+'  reduce 69
+	'-'  reduce 69
+	'*'  reduce 69
+	'%'  reduce 69
+	'/'  reduce 69
+	')'  reduce 69
+
+
+state 39
+	while_stmt : WHILE test . ':' suite  (19)
+
+	':'  shift 70
+	.  error
+
+
+state 40
+	not_test : NOT not_test .  (33)
+
+	.  reduce 33
+
+
+state 41
+	if_stmt : IF test . ':' suite ELSE ':' suite  (17)
+	if_stmt : IF test . ':' suite  (18)
+
+	':'  shift 71
+	.  error
+
+
+state 42
+	print_stmt : PRINT test .  (14)
+
+	.  reduce 14
+
+
+state 43
+	factor : '+' factor .  (67)
+
+	.  reduce 67
+
+
+state 44
+	factor : '-' factor .  (66)
+
+	.  reduce 66
+
+
+state 45
+	atom : '(' test . ')'  (75)
+
+	')'  shift 72
+	.  error
+
+
+state 46
+	file_input : file_input SALTO .  (5)
+
+	.  reduce 5
+
+
+state 47
+	file_input : file_input stmt .  (6)
+
+	.  reduce 6
+
+
+state 48
+	simple_stmt : small_stmt SALTO .  (9)
+
+	.  reduce 9
+
+
+state 49
+	expr_stmt : test '=' . test  (13)
+
+	NOT  shift 3
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	test  goto 73
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 50
+	or_test1 : and_test OR .  (27)
+
+	.  reduce 27
+
+
+state 51
+	or_test : or_test1 and_test .  (26)
+	or_test1 : or_test1 and_test . OR  (28)
+
+	OR  shift 74
+	SALTO  reduce 26
+	'='  reduce 26
+	':'  reduce 26
+	')'  reduce 26
+
+
+state 52
+	and_test1 : not_test AND .  (31)
+
+	.  reduce 31
+
+
+state 53
+	and_test : and_test1 not_test .  (30)
+	and_test1 : and_test1 not_test . AND  (32)
+
+	AND  shift 75
+	SALTO  reduce 30
+	OR  reduce 30
+	'='  reduce 30
+	':'  reduce 30
+	')'  reduce 30
+
+
+state 54
+	comparison1 : expr MENOR_IGUAL .  (40)
+
+	.  reduce 40
+
+
+state 55
+	comparison1 : expr MAYOR_IGUAL .  (41)
+
+	.  reduce 41
+
+
+state 56
+	comparison1 : expr IGUAL_IGUAL .  (39)
+
+	.  reduce 39
+
+
+state 57
+	comparison1 : expr DIFERENTE .  (42)
+
+	.  reduce 42
+
+
+state 58
+	comparison1 : expr '<' .  (37)
+
+	.  reduce 37
+
+
+state 59
+	comparison1 : expr '>' .  (38)
+
+	.  reduce 38
+
+
+state 60
+	comparison : comparison1 expr .  (36)
+	comparison1 : comparison1 expr . '<'  (43)
+	comparison1 : comparison1 expr . '>'  (44)
+	comparison1 : comparison1 expr . IGUAL_IGUAL  (45)
+	comparison1 : comparison1 expr . MENOR_IGUAL  (46)
+	comparison1 : comparison1 expr . MAYOR_IGUAL  (47)
+	comparison1 : comparison1 expr . DIFERENTE  (48)
+
+	MENOR_IGUAL  shift 76
+	MAYOR_IGUAL  shift 77
+	IGUAL_IGUAL  shift 78
+	DIFERENTE  shift 79
+	'<'  shift 80
+	'>'  shift 81
+	SALTO  reduce 36
+	OR  reduce 36
+	AND  reduce 36
+	'='  reduce 36
+	':'  reduce 36
+	')'  reduce 36
+
+
+state 61
+	expr1 : term '+' .  (51)
+
+	.  reduce 51
+
+
+state 62
+	expr1 : term '-' .  (52)
+
+	.  reduce 52
+
+
+state 63
+	expr : expr1 term .  (50)
+	expr1 : expr1 term . '+'  (53)
+	expr1 : expr1 term . '-'  (54)
+
+	'+'  shift 82
+	'-'  shift 83
+	SALTO  reduce 50
+	OR  reduce 50
+	AND  reduce 50
+	MENOR_IGUAL  reduce 50
+	MAYOR_IGUAL  reduce 50
+	IGUAL_IGUAL  reduce 50
+	DIFERENTE  reduce 50
+	'='  reduce 50
+	':'  reduce 50
+	'<'  reduce 50
+	'>'  reduce 50
+	')'  reduce 50
+
+
+state 64
+	term1 : factor DIVISION_ENTERA .  (58)
+
+	.  reduce 58
+
+
+state 65
+	term1 : factor '*' .  (57)
+
+	.  reduce 57
+
+
+state 66
+	term1 : factor '%' .  (59)
+
+	.  reduce 59
+
+
+state 67
+	term1 : factor '/' .  (60)
+
+	.  reduce 60
+
+
+state 68
+	term : term1 factor .  (56)
+	term1 : term1 factor . '*'  (61)
+	term1 : term1 factor . DIVISION_ENTERA  (62)
+	term1 : term1 factor . '%'  (63)
+	term1 : term1 factor . '/'  (64)
+
+	DIVISION_ENTERA  shift 84
+	'*'  shift 85
+	'%'  shift 86
+	'/'  shift 87
+	SALTO  reduce 56
+	OR  reduce 56
+	AND  reduce 56
+	MENOR_IGUAL  reduce 56
+	MAYOR_IGUAL  reduce 56
+	IGUAL_IGUAL  reduce 56
+	DIFERENTE  reduce 56
+	'='  reduce 56
+	':'  reduce 56
+	'<'  reduce 56
+	'>'  reduce 56
+	'+'  reduce 56
+	'-'  reduce 56
+	')'  reduce 56
+
+
+state 69
+	power : atom POW . factor  (68)
+
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	factor  goto 88
+	power  goto 37
+	atom  goto 38
+
+
+state 70
+	while_stmt : WHILE test ':' . suite  (19)
+
+	SALTO  shift 89
+	NOT  shift 3
+	PRINT  shift 5
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	simple_stmt  goto 90
+	small_stmt  goto 19
+	expr_stmt  goto 20
+	print_stmt  goto 21
+	test  goto 22
+	suite  goto 91
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 71
+	if_stmt : IF test ':' . suite ELSE ':' suite  (17)
+	if_stmt : IF test ':' . suite  (18)
+
+	SALTO  shift 89
+	NOT  shift 3
+	PRINT  shift 5
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	simple_stmt  goto 90
+	small_stmt  goto 19
+	expr_stmt  goto 20
+	print_stmt  goto 21
+	test  goto 22
+	suite  goto 92
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 72
+	atom : '(' test ')' .  (75)
+
+	.  reduce 75
+
+
+state 73
+	expr_stmt : test '=' test .  (13)
+
+	.  reduce 13
+
+
+state 74
+	or_test1 : or_test1 and_test OR .  (28)
+
+	.  reduce 28
+
+
+state 75
+	and_test1 : and_test1 not_test AND .  (32)
+
+	.  reduce 32
+
+
+state 76
+	comparison1 : comparison1 expr MENOR_IGUAL .  (46)
+
+	.  reduce 46
+
+
+state 77
+	comparison1 : comparison1 expr MAYOR_IGUAL .  (47)
+
+	.  reduce 47
+
+
+state 78
+	comparison1 : comparison1 expr IGUAL_IGUAL .  (45)
+
+	.  reduce 45
+
+
+state 79
+	comparison1 : comparison1 expr DIFERENTE .  (48)
+
+	.  reduce 48
+
+
+state 80
+	comparison1 : comparison1 expr '<' .  (43)
+
+	.  reduce 43
+
+
+state 81
+	comparison1 : comparison1 expr '>' .  (44)
+
+	.  reduce 44
+
+
+state 82
+	expr1 : expr1 term '+' .  (53)
+
+	.  reduce 53
+
+
+state 83
+	expr1 : expr1 term '-' .  (54)
+
+	.  reduce 54
+
+
+state 84
+	term1 : term1 factor DIVISION_ENTERA .  (62)
+
+	.  reduce 62
+
+
+state 85
+	term1 : term1 factor '*' .  (61)
+
+	.  reduce 61
+
+
+state 86
+	term1 : term1 factor '%' .  (63)
+
+	.  reduce 63
+
+
+state 87
+	term1 : term1 factor '/' .  (64)
+
+	.  reduce 64
+
+
+state 88
+	power : atom POW factor .  (68)
+
+	.  reduce 68
+
+
+state 89
+	suite : SALTO . INDENTA suite1 DEINDENTA  (21)
+
+	INDENTA  shift 93
+	.  error
+
+
+state 90
+	suite : simple_stmt .  (20)
+
+	.  reduce 20
+
+
+state 91
+	while_stmt : WHILE test ':' suite .  (19)
+
+	.  reduce 19
+
+
+state 92
+	if_stmt : IF test ':' suite . ELSE ':' suite  (17)
+	if_stmt : IF test ':' suite .  (18)
+
+	ELSE  shift 94
+	$end  reduce 18
+	SALTO  reduce 18
+	WHILE  reduce 18
+	NOT  reduce 18
+	IF  reduce 18
+	PRINT  reduce 18
+	BOOLEANO  reduce 18
+	ENTERO  reduce 18
+	REAL  reduce 18
+	IDENTIFICADOR  reduce 18
+	CADENA  reduce 18
+	DEINDENTA  reduce 18
+	'+'  reduce 18
+	'-'  reduce 18
+	'('  reduce 18
+
+
+state 93
+	suite : SALTO INDENTA . suite1 DEINDENTA  (21)
+
+	WHILE  shift 2
+	NOT  shift 3
+	IF  shift 4
+	PRINT  shift 5
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	stmt  goto 95
+	simple_stmt  goto 17
+	compound_stmt  goto 18
+	small_stmt  goto 19
+	expr_stmt  goto 20
+	print_stmt  goto 21
+	test  goto 22
+	if_stmt  goto 23
+	while_stmt  goto 24
+	suite1  goto 96
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 94
+	if_stmt : IF test ':' suite ELSE . ':' suite  (17)
+
+	':'  shift 97
+	.  error
+
+
+state 95
+	suite1 : stmt .  (22)
+
+	.  reduce 22
+
+
+state 96
+	suite : SALTO INDENTA suite1 . DEINDENTA  (21)
+	suite1 : suite1 . stmt  (23)
+
+	WHILE  shift 2
+	NOT  shift 3
+	IF  shift 4
+	PRINT  shift 5
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	DEINDENTA  shift 98
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	stmt  goto 99
+	simple_stmt  goto 17
+	compound_stmt  goto 18
+	small_stmt  goto 19
+	expr_stmt  goto 20
+	print_stmt  goto 21
+	test  goto 22
+	if_stmt  goto 23
+	while_stmt  goto 24
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 97
+	if_stmt : IF test ':' suite ELSE ':' . suite  (17)
+
+	SALTO  shift 89
+	NOT  shift 3
+	PRINT  shift 5
+	BOOLEANO  shift 6
+	ENTERO  shift 7
+	REAL  shift 8
+	IDENTIFICADOR  shift 9
+	CADENA  shift 10
+	'+'  shift 11
+	'-'  shift 12
+	'('  shift 13
+	.  error
+
+	simple_stmt  goto 90
+	small_stmt  goto 19
+	expr_stmt  goto 20
+	print_stmt  goto 21
+	test  goto 22
+	suite  goto 100
+	or_test  goto 25
+	and_test  goto 26
+	or_test1  goto 27
+	not_test  goto 28
+	and_test1  goto 29
+	comparison  goto 30
+	expr  goto 31
+	comparison1  goto 32
+	term  goto 33
+	expr1  goto 34
+	factor  goto 35
+	term1  goto 36
+	power  goto 37
+	atom  goto 38
+
+
+state 98
+	suite : SALTO INDENTA suite1 DEINDENTA .  (21)
+
+	.  reduce 21
+
+
+state 99
+	suite1 : suite1 stmt .  (23)
+
+	.  reduce 23
+
+
+state 100
+	if_stmt : IF test ':' suite ELSE ':' suite .  (17)
+
+	.  reduce 17
+
+
+36 terminals, 28 nonterminals
+76 grammar rules, 101 states

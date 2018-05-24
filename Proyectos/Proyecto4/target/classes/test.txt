@@ -1,0 +1,33 @@
+pow = (1 ** 2)
+por = (1 * 2)
+pand = not ((((1+2-4) <= (1/2))) and (por >= (3//2)) or ((1-2+5) == por)) or True or False
+v = .1
+t = 5.
+z = 4.0
+condicion = True  
+        
+
+
+   
+# este comentario no hace nada
+
+ 
+ 
+ 
+ 
+
+while condicion: #este es un comentario que no hace nada x2
+   
+    t = v
+   #este es un comentario que no hace nada x3
+    if v != 100:
+        print t
+    else:
+        print "He terminado de escribir la tabla del 5 !que cansado¡"
+        condicion = False
+if condicion:
+    if True:
+        print 5
+    while False:
+        print 5
+print 5
