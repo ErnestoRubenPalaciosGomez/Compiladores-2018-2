@@ -1,5 +1,5 @@
 pow = (1 ** 2)
-por = (1 * 2)
+por = (1 + 2)
 pand = not ((((1+2-4) <= (1/2))) and (por >= (3//2)) or ((1-2+5) == por)) or True or False
 v = .1
 t = 5.

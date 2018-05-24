@@ -599,7 +599,6 @@ public class VisitorType implements Visitor {
 
     @Override
     public void visit(IdentifierHoja n) {
-      ;
     }
 
     @Override
@@ -635,11 +634,14 @@ public class VisitorType implements Visitor {
 
     @Override
     public void visit(NodoStmts n) {
+        String nombre = "";
         for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
             Nodo hijo = (Nodo) i.next();
             if ( hijo != null){
                 hijo.accept(this);    
+                nombre = hijo.getNombre();
             }    
+            estaDeclarada(nombre);
         }
     }
 
@@ -663,11 +665,11 @@ public class VisitorType implements Visitor {
         
         if( n.getHijos().getAll().get(1) != null){
             n.getHijos().getAll().get(1).accept(this);
-        }          
+        }        
         if(n.getHijos().size() == 3){
             if( n.getHijos().getAll().get(2) != null){
                 n.getHijos().getAll().get(2).accept(this);
-            }          
+            } 
         }       
     }
 
@@ -678,9 +680,12 @@ public class VisitorType implements Visitor {
 
     @Override
     public void visit(NodoPrint n) {
+        String nombre = "";
         if(n.getPrimerHijo() != null){
             n.getPrimerHijo().accept(this);
+            nombre = n.getPrimerHijo().getNombre();
         }    
+        estaDeclarada(nombre);
     }
 
     @Override
@@ -700,9 +705,8 @@ public class VisitorType implements Visitor {
         if(tipo_cond != 3){
             ErrorCondicion("'while'");
         }  
-        
         if( n.getUltimoHijo() != null){
             n.getUltimoHijo().accept(this);
-        }          
+        }       
     }  
 }
