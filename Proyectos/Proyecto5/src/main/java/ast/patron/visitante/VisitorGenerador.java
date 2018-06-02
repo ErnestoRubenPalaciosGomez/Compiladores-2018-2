@@ -305,6 +305,7 @@ public class VisitorGenerador implements Visitor{
                 hijo.accept(this);    
             }    
         }
+        salida += "nop \n";
         this.escribe_codigo_objeto();
         
     }
@@ -349,7 +350,7 @@ public class VisitorGenerador implements Visitor{
     private void escribe_codigo_objeto(){
         BufferedWriter escritor = null;
         try {
-            String ruta = "src/main/resources/out/" + Compilador.NOMBRE_ARCHIVO+ ".asm";
+            String ruta = "out/" + Compilador.NOMBRE_ARCHIVO+ ".asm";
             escritor = new BufferedWriter (new FileWriter (ruta));
             escritor.write(salida);
         } catch (IOException ex) {

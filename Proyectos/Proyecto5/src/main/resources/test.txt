@@ -1,9 +1,14 @@
-x=5
-y = 2+3
-z = 50 - 10 - 10
+x= 5
+y = 0 + x
+a = x + 3
+z = 50 * x
+b = 50 - x
+c = x - 50
+d = x*y
 print (z // (y+x))
 t = 6
+print (x*t)
 p = 20
 print (t + p)
 q = 30 
-print (q+z)
+print (q-z)
